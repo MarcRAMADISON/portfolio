@@ -16,6 +16,7 @@
     grid-template-columns: repeat(6,1fr);
     place-items: center;
     text-align: right;
+    max-width: 900px;
 }
 
 .menuText{

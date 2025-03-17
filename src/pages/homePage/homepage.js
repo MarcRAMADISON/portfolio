@@ -29,6 +29,7 @@ import { Chart } from "chart.js/auto";
 import my_cv from "./new-cv.pdf";
 import ShapeAnimation from "../../components/shapeAnimation";
 import ScrollView from "../../components/scrollView";
+import animation1 from "../homePage/Animation1.json";
 
 const Homepage = () => {
   const isMobile = useMediaQuery("(max-width:920px)");
@@ -161,29 +162,27 @@ const Homepage = () => {
       <Box
         id="home"
         className="block"
-        sx={{ position: "relative", width: "100%" }}
+        sx={{
+          width: "100vw",
+          maxWidth:"1680px",
+          height: "90vh",
+          minHeight: isMobile? "100vh": "900px",
+          margin:"auto",
+          placeSelf:"center",
+          display:"flex",
+          flexDirection: isMobile? 'column' : 'row'
+        }}
       >
-        <img
-          style={{
-            width: "100%",
-            height: isMobile ? "100%" : "100vh",
-            objectFit: "cover",
-          }}
-          src={
-            isMobile
-              ? "/images/mobile_baniere_web_portfolio.jpg"
-              : "/images/new_banniere_web.jpg"
-          }
-          alt="banière"
-        />
+        
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            position: "absolute",
-            top: isMobile ? "24%" : "35%",
-            width: isMobile ? "100%" : "50%",
+            marginTop:isMobile ? '17vh' : '40vh',
+            width: isMobile ? "100%" : "60%",
+            textAlign:"center",
+            marginLeft:isMobile ? '0px' : '2rem'
           }}
         >
           <Typography
@@ -216,6 +215,14 @@ const Homepage = () => {
             </Button>
           </a>
         </Box>
+        <Lottie
+            style={{
+              maxWidth: "920px",
+            }}
+            width="90%"
+            animationData={animation1}
+          />
+        
       </Box>
       <Box
         id="about"
@@ -231,18 +238,18 @@ const Homepage = () => {
           position: "relative",
         }}
       >
-        <Animation
+        {!isMobile ? <Animation
           animationIn="fadeIn"
           animationOut="fadeOut"
           duration={3}
           initiallyVisible={false}
         >
           <Lottie
-            style={{ maxWidth: "820px", marginLeft: isMobile ? "20%" : "0px" }}
+            style={{ maxWidth: "720px", marginLeft: isMobile ? "20%" : "0px" }}
             width="90%"
             animationData={animation}
           />
-        </Animation>
+        </Animation> : <></>}
         <Animation
           animationIn="fadeIn"
           animationOut="fadeOut"
@@ -488,7 +495,11 @@ const Homepage = () => {
                 />
               ) : (
                 <Box>
-                  <canvas id="myChart" width={isMobile? "300px" : "700px"} height={isMobile? "350px" : "400"}></canvas>
+                  <canvas
+                    id="myChart"
+                    width={isMobile ? "300px" : "700px"}
+                    height={isMobile ? "350px" : "400"}
+                  ></canvas>
                 </Box>
               )}
             </Box>
@@ -569,7 +580,7 @@ const Homepage = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          mt: isMobile? '100px' : '0px',
+          mt: isMobile ? "100px" : "0px",
           pt: "60px",
           position: "relative",
         }}
@@ -594,7 +605,7 @@ const Homepage = () => {
             gridTemplateColumns: isMobile ? "100%" : "repeat(3,1fr)",
             width: "90%",
             maxWidth: "1100px",
-            mt: isMobile? '30px' : "70px",
+            mt: isMobile ? "30px" : "70px",
             gap: isMobile ? "70px" : "20px",
           }}
         >

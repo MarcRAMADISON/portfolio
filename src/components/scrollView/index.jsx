@@ -47,6 +47,7 @@ function ScrollView() {
         backgroundColor: "#ff932b",
         height: `${position}vh`,
         width: "0.8vw",
+        maxWidth:'10px',
         zIndex:'5',
         transition:' height 1s ease-in',
       }}
