@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./speedMailStyle.css";
 import {
   TextField,
@@ -6,9 +6,9 @@ import {
   Button,
   Box,
   Alert,
-  Typography,
   Modal,
   IconButton,
+  Typography,
 } from "@mui/material";
 import emailjs from "@emailjs/browser";
 import { Close, EmailRounded, Send } from "@mui/icons-material";
@@ -18,12 +18,14 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "75%",
+  width: "85vw",
   maxWidth: "350px",
+  height: "auto",
+  maxHeight: "600px",
   bgcolor: "background.paper",
   boxShadow: 24,
-  p: 4,
   textAlign: "center",
+  p: "40px",
   border: "none",
   outline: "none !important",
 };
@@ -32,8 +34,20 @@ function SpeedMail() {
   const [showForm, setShowForm] = useState(false);
   const [values, setValues] = useState();
   const [status, setStatus] = useState("init");
+  const [showMessage, setShowMessage] = useState(false);
 
   const handleClose = () => setShowForm(false);
+
+  useEffect(() => {
+    const container = document.getElementById("hover");
+
+    container.addEventListener("mouseenter", () => {
+      setShowMessage(true);
+    });
+    container.addEventListener("mouseleave", () => {
+      setShowMessage(false);
+    });
+  }, []);
 
   const sendMail = () => {
     setStatus("proccess");
@@ -60,8 +74,23 @@ function SpeedMail() {
 
   return (
     <>
+      <Box
+        sx={{
+          backgroundColor:'#3457ff',
+          borderRadius:'20px',
+          p:'15px 20px 15px 20px',
+          position: "fixed",
+          bottom: "40px",
+          right: "80px",
+          opacity: showMessage ? "0.9" : "0",
+          color:'#fff',
+          zIndex: '50',
+          transition:'all 0.3s ease-in'
+        }}
+      >Envoyer un message</Box>
       <Box className="borderContainer"> </Box>
       <Box
+        id="hover"
         className="speedMailContainer"
         onClick={() =>
           setShowForm((prev) => {
@@ -71,7 +100,9 @@ function SpeedMail() {
           })
         }
       >
-        <IconButton  sx={{width:'100%',color:'#f0f0f0'}}><EmailRounded /></IconButton>
+        <IconButton sx={{ width: "100%", color: "#f0f0f0" }}>
+          <EmailRounded />
+        </IconButton>
       </Box>
       <Modal
         open={showForm}
@@ -80,40 +111,79 @@ function SpeedMail() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
+          <Box
+            sx={{
+              backgroundColor: "#ff932b",
+              position: "absolute",
+              top: "0",
+              left: "0",
+              width: "100%",
+              height: "100px",
+              borderRadius: "0px 0px 60% 0px",
+              zIndex: "0",
+            }}
+          ></Box>
+          <Box
+            sx={{
+              backgroundImage:
+                "linear-gradient(to bottom left,#3457ff,#5d9cff)",
+              position: "absolute",
+              top: "0",
+              left: "0",
+              width: "100%",
+              height: "100px",
+              borderRadius: "0px 0px 90% 0px",
+              zIndex: "0",
+            }}
+          ></Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              position: "absolute",
+              top: "20px",
+              left: "30px",
+              zIndex: "60",
+            }}
+          >
+            <img
+              style={{
+                width: "60px",
+                height: "60px",
+                borderRadius: "50%",
+              }}
+              src="/images/profil.png"
+              alt="profil"
+            />
+            <Typography
+              sx={{ fontWeight: "bold", ml: "10px" }}
+              variant="body1"
+              color="#f0f0f0"
+            >
+              Contacter moi
+            </Typography>
+          </Box>
+
           <Button
             sx={{
-              position:'absolute',
-              top:'15px',
-              right:'15px',
-              color:'red'
+              zIndex: 50,
+              position: "absolute",
+              top: "5px",
+              right: "0",
+              color: "red",
             }}
-            startIcon={<Close/>}
             onClick={(e) => {
               e.preventDefault();
               setShowForm(false);
             }}
-          />
-          {status === "success" ? (
-            <Alert color="success">Votre message a été envoyé</Alert>
-          ) : status === "error" ? (
-            <Alert color="error">Erreur d'envoie de votre message</Alert>
-          ) : (
-            <></>
-          )}
-          <Typography variant="h5" sx={{ fontWeight:'bold',color: "#ff932b", mt: "20px" }}>
-            Besoin d'aide?
-          </Typography>
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            sx={{ fontStyle:'italic', width: "100%", textAlign: "center", m: "10px 0px 50px 0px" }}
           >
-            Envoyer nous un message par mail. Nous vous répondrons le plus tôt
-            possible
-          </Typography>
+            <Close />
+          </Button>
+
           <TextField
             type="email"
-            sx={{ width: "100%", mb: "20px" }}
+            sx={{ width: "100%", mb: "20px", mt: "90px" }}
             id="filled-basic"
             name="from_name"
             label="Votre adresse email"
@@ -123,7 +193,8 @@ function SpeedMail() {
           />
           <TextareaAutosize
             style={{ color: "grey" }}
-            minRows={10}
+            minRows={11}
+            maxRows={11}
             type="text"
             name="message"
             placeholder="Votre message *"
@@ -135,13 +206,24 @@ function SpeedMail() {
             startIcon={<Send />}
             onClick={sendMail}
             variant="contained"
-            sx={{ marginTop: "30px", width: "50%" }}
+            sx={{ marginTop: "20px", width: "50%" }}
             disabled={
               status === "proccess" || !values?.from_name || !values?.message
             }
           >
             Envoyer
           </Button>
+          {status === "success" ? (
+            <Alert sx={{ mt: "20px" }} color="success">
+              Votre message a été envoyé
+            </Alert>
+          ) : status === "error" ? (
+            <Alert sx={{ mt: "20px" }} color="error">
+              Erreur d'envoie de votre message
+            </Alert>
+          ) : (
+            <></>
+          )}
         </Box>
       </Modal>
     </>

@@ -1,65 +1,65 @@
-.speedMailContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position:fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 50;
-    width:55px;
-    height: 55px;
-    border-radius: 50%;
-    background-color: #3457ff;
-    
+.speedMailContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 40px;
+  right: 20px;
+  z-index: 50;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #3457ff;
 }
 
-.borderContainer{
-    position:fixed;
-    bottom: 15px;
-    right: 15px;
-    border:#f0f0f0 dotted 3px;
-    animation: cercleAnimation 10s linear infinite;
-    width:60px;
-    height: 60px;
-    border-radius: 50%;
-    z-index: 50;
+.borderContainer {
+  position: fixed;
+  bottom: 35px;
+  right: 15px;
+  border: #f0f0f0 dotted 3px;
+  animation: cercleAnimation 10s linear infinite;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  z-index: 50;
 }
 
-.speedMailContainer:hover{
-    cursor: pointer;
+.speedMailContainer:hover {
+  cursor: pointer;
 }
 
-.inputMail{
-    font-family: serif;
-    font-weight: lighter;
-    font-size: 1rem;
-    width:90%;
-    height: 30px;
-    margin-top: 10px;
-    border: 'solid #474a51 2px';
-    padding: 10px;
+.inputMail {
+  font-family: serif;
+  font-weight: lighter;
+  font-size: 1rem;
+  width: 90%;
+  height: '70vh';
+  margin-top: 10px;
+  border: "solid #474a51 2px";
+  padding: 10px;
 }
 
-.inputMail:focus{
-    width:90%;
-    height: 30px;
-    margin-top: 10px;
-    outline: none !important;
+.inputMail:focus {
+  width: 90%;
+  height: '70vh';
+  margin-top: 10px;
+  outline: none !important;
 }
 
-.sendButton{
-    color: beige;
-    width:50%;
-    height: 40px;
-    margin-top: 10px;
-    border: none;
+.sendButton {
+  color: beige;
+  width: 50%;
+  height: 40px;
+  margin-top: 10px;
+  border: none;
 }
 
 @keyframes cercleAnimation {
-    from {
-        transform:rotate(0deg);
-    }to{
-        transform:rotate(360deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 
-const ExperienceCard = ({ title, description, date, place }) => {
+const ExperienceCard = ({ title, description, date, place,isMobile }) => {
   return (
     <Box
       sx={{
@@ -11,9 +11,10 @@ const ExperienceCard = ({ title, description, date, place }) => {
         alignItems: "center",
         backgroundColor: "#222",
         padding: "25px",
+        width:'85%',
         maxWidth: "350px",
         height:'100%',
-        minHeight: "300px",
+        minHeight: isMobile? 'auto' : "400px",
         placeSelf: "center",
         textAlign: "center",
       }}
@@ -41,15 +42,15 @@ const ExperienceCard = ({ title, description, date, place }) => {
           {date}
         </Typography>
       </Box>
-      {description.map((d) => {
+      {description.map((d,index) => {
         return (
-          <Box sx={{display:'flex',mt:'20px'}}>
+          <Box key={index} sx={{display:'flex',mt:'20px'}}>
             <Box sx={{backgroundColor:"#ff932b",width:'10px',height:'10px',borderRadius:'50%',m:'10px 20px 0px 0px'}}></Box>
             <Typography
             sx={{width:'90%',textAlign:'left'}}
               className="title"
               color="#f0f0f0"
-              variant="body1"
+              variant={isMobile? "body2" : "body1"}
             >
               {d}
             </Typography>

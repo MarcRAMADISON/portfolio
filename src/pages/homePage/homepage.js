@@ -26,7 +26,9 @@ import ExperienceCard from "../../components/ExperienceCard";
 import Footer from "../../components/footer/footer";
 import { Download, Send } from "@mui/icons-material";
 import { Chart } from "chart.js/auto";
-import my_cv from './new-cv.pdf'
+import my_cv from "./new-cv.pdf";
+import ShapeAnimation from "../../components/shapeAnimation";
+import ScrollView from "../../components/scrollView";
 
 const Homepage = () => {
   const isMobile = useMediaQuery("(max-width:920px)");
@@ -69,8 +71,8 @@ const Homepage = () => {
           ],
         },
         options: {
-          aspectRatio: isMobile ? 1 : 2 / 1,
-          maintainAspectRatio: true,
+          responsive: false,
+          maintainAspectRatio: false,
           scales: {
             y: {
               beginAtZero: true,
@@ -140,7 +142,7 @@ const Homepage = () => {
       }}
     >
       <Lottie
-        style={{ width: isMobile ? "60vh" : "50vh" }}
+        style={{ width: isMobile ? "55vh" : "50vh" }}
         animationData={techAnimation}
       />
     </Box>
@@ -153,6 +155,7 @@ const Homepage = () => {
         alignItems: "center",
       }}
     >
+      <ScrollView />
       <MenuBar />
       <SpeedMail />
       <Box
@@ -169,7 +172,7 @@ const Homepage = () => {
           src={
             isMobile
               ? "/images/mobile_baniere_web_portfolio.jpg"
-              : "/images/baniere_web_portfolio.jpg"
+              : "/images/new_banniere_web.jpg"
           }
           alt="banière"
         />
@@ -179,53 +182,39 @@ const Homepage = () => {
             flexDirection: "column",
             alignItems: "center",
             position: "absolute",
-            top: isMobile ? "25%" : "40%",
+            top: isMobile ? "24%" : "35%",
             width: isMobile ? "100%" : "50%",
           }}
         >
-          <Animation
-            animationIn="fadeIn"
-            animationOut="fadeOut"
-            duration={4}
-            initiallyVisible={true}
+          <Typography
+            sx={{ fontWeight: "bold", color: "#ff932b" }}
+            variant={isMobile ? "h4" : "h3"}
           >
-            <Typography
-              sx={{ fontWeight:'bold',color: "#ff932b" }}
-              variant={isMobile ? "h4" : "h3"}
-            >
-              Marc RAMADISON
-            </Typography>
-          </Animation>
-          <Animation
-            animationIn="fadeIn"
-            animationOut="fadeOut"
-            duration={5}
-            initiallyVisible={true}
+            Marc RAMADISON
+          </Typography>
+
+          <Typography
+            sx={{ fontStyle: "italic", color: "#f0f0f0", mt: "10px" }}
+            variant={isMobile ? "body1" : "h6"}
           >
-            <Typography
-              sx={{ fontStyle:'italic',color: "#f0f0f0", mt: "10px" }}
-              variant={isMobile ? "body1" : "h6"}
-            >
-              Développeur web fullstack
-            </Typography>
-          </Animation>
-          <Animation
-            animationIn="fadeIn"
-            animationOut="fadeOut"
-            duration={6}
-            initiallyVisible={true}
+            Développeur web fullstack
+          </Typography>
+
+          <a
+            href={my_cv}
+            download="Marc_Ramadison's_CV"
+            target="_blank"
+            rel="noreferrer"
           >
-            <a href={my_cv} download="Marc_Ramadison's_CV" target='_blank' rel='noreferrer'>
             <Button
-                startIcon={<Download />}
-                size={isMobile ? "medium" : "large"}
-                variant="contained"
-                sx={{ mt: "50px" }}
-              >
-                Télécharger mon CV
-              </Button>
-            </a>
-          </Animation>
+              startIcon={<Download />}
+              size={isMobile ? "medium" : "large"}
+              variant="contained"
+              sx={{ mt: isMobile ? "30px" : "40px" }}
+            >
+              Télécharger mon CV
+            </Button>
+          </a>
         </Box>
       </Box>
       <Box
@@ -239,6 +228,7 @@ const Homepage = () => {
           marginLeft: isMobile ? "0" : "10%",
           width: isMobile ? "90%" : "80%",
           padding: "10px",
+          position: "relative",
         }}
       >
         <Animation
@@ -265,24 +255,34 @@ const Homepage = () => {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              width: "90%",
+              width: isMobile ? "95%" : "90%",
               mt: isMobile ? "20px" : "40px",
               textAlign: "center",
-              ml: "20%",
+              ml: "25%",
             }}
           >
             <Typography
-              sx={{ fontWeight:'bold',color: "#ff932b", mb: "30px", ml: "20px" }}
+              sx={{
+                fontWeight: "bold",
+                color: "#ff932b",
+                mb: "30px",
+                ml: isMobile ? "0px" : "20px",
+              }}
               variant={isMobile ? "h4" : "h3"}
             >
               A propos
             </Typography>
             <Typography
-              sx={{ fontStyle:'italic',color: "#f0f0f0", lineHeight: "30px" }}
-              variant="body1"
+              sx={{
+                fontStyle: "italic",
+                color: "#f0f0f0",
+                lineHeight: "30px",
+                zIndex: 100,
+              }}
+              variant={isMobile ? "body2" : "body1"}
             >
               Je m'appelle Marc RAMADISON, je suis un développeur fullstack
-              javascript expérimenté avec 3 ans d'expérience notement avec les
+              javascript expérimenté avec 3 ans d'expérience notamment avec les
               technologies Reactjs, Nextjs, React material UI, Nodejs, Express
               et le CMS Headless Strapi.
               <br />
@@ -297,6 +297,8 @@ const Homepage = () => {
             </Typography>
           </Box>
         </Animation>
+        <ShapeAnimation size="large" bottom="-150px" right="-3vw" />
+        <ShapeAnimation size="small" bottom="-250px" right="35vw" />
       </Box>
       <Box
         id="services"
@@ -317,7 +319,7 @@ const Homepage = () => {
           initiallyVisible={false}
         >
           <Typography
-            sx={{ fontWeight:'bold',color: "#ff932b" }}
+            sx={{ fontWeight: "bold", color: "#ff932b" }}
             variant={isMobile ? "h4" : "h3"}
           >
             Mes services
@@ -328,16 +330,20 @@ const Homepage = () => {
               display: "flex",
               flexDirection: "row",
               justifyContent: "center",
-              width: "90%",
+              width: isMobile ? "75%" : "90%",
               maxWidth: "1100px",
-              marginTop: "20px",
+              marginTop: "10px",
               overflow: "visible",
               "& .react-multi-carousel-item": {
                 display: "flex",
                 justifyContent: "center",
               },
-              "& .react-multiple-carousel__arrow--left": { left: "1%" },
-              "& .react-multiple-carousel__arrow--right": { right: "1%" },
+              "& .react-multiple-carousel__arrow--left": {
+                left: "0%",
+              },
+              "& .react-multiple-carousel__arrow--right": {
+                right: "0%",
+              },
               "& .react-multi-carousel-dot-list": { bottom: "0" },
               "& .react-multi-carousel-track": {
                 textAlign: "center",
@@ -397,8 +403,15 @@ const Homepage = () => {
           alignItems: "center",
           mt: "100px",
           pt: "60px",
+          position: "relative",
         }}
       >
+        <ShapeAnimation
+          size="small"
+          bottom={!checked ? "490px" : "650px"}
+          right="30vw"
+        />
+
         <Animation
           animationIn="fadeIn"
           animationOut="fadeOut"
@@ -406,20 +419,28 @@ const Homepage = () => {
           initiallyVisible={false}
         >
           <Typography
-            sx={{ fontWeight:'bold',color: "#ff932b" }}
+            sx={{ fontWeight: "bold", color: "#ff932b" }}
             variant={isMobile ? "h4" : "h3"}
           >
             Mes compétences
           </Typography>
-          <Box
-            sx={{
-              display: "grid",
-              gridTemplateColumns: isMobile ? "100%" : "80% 20%",
-              gap: "30px",
-              width: isMobile ? "100%" : "85%",
-              maxWidth: "1100px",
-              mt: isMobile ? "30px" : "60px",
-            }}
+        </Animation>
+
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: isMobile ? "100%" : "70% 30%",
+            gap: "10px",
+            width: isMobile ? "100%" : "85%",
+            maxWidth: "1100px",
+            mt: isMobile ? "30px" : "60px",
+          }}
+        >
+          <Animation
+            animationIn="fadeIn"
+            animationOut="fadeOut"
+            duration={4}
+            initiallyVisible={false}
           >
             <Box
               sx={{
@@ -430,13 +451,21 @@ const Homepage = () => {
             >
               <Box sx={{ display: "flex" }}>
                 <Switch
-                size={isMobile ? 'small' : 'medium'}
+                  size={isMobile ? "small" : "medium"}
                   checked={checked}
                   onChange={() => setChecked((prev) => !prev)}
-                  sx={{ mb: isMobile ? "15px" : "20px", mr:'10px',mt:isMobile? '5px' : '0px' }}
+                  sx={{
+                    mb: isMobile ? "15px" : "20px",
+                    mr: "10px",
+                    mt: isMobile ? "5px" : "0px",
+                  }}
                   label="mode graphique"
                 />
-                <Typography  sx={{fontStyle:'italic'}} color="primary" variant={isMobile ? "h6" : "h5"}>
+                <Typography
+                  sx={{ fontStyle: "italic" }}
+                  color="primary"
+                  variant={isMobile ? "h6" : "h5"}
+                >
                   {checked ? "Mode affichage" : "Mode graphique"}
                 </Typography>
               </Box>
@@ -446,7 +475,7 @@ const Homepage = () => {
                   style={{
                     maxWidth: "920px",
                     width: isMobile ? "80%" : "100%",
-                    maxHeight: isMobile ? "70vh" : "100%",
+                    maxHeight: isMobile ? "70vh" : "75%",
                     objectFit: "contain",
                     objectPosition: "50% 0",
                   }}
@@ -458,10 +487,19 @@ const Homepage = () => {
                   alt="compétances"
                 />
               ) : (
-                <canvas id="myChart"></canvas>
+                <Box>
+                  <canvas id="myChart" width={isMobile? "300px" : "700px"} height={isMobile? "350px" : "400"}></canvas>
+                </Box>
               )}
             </Box>
+          </Animation>
 
+          <Animation
+            animationIn="fadeIn"
+            animationOut="fadeOut"
+            duration={4}
+            initiallyVisible={false}
+          >
             <Box
               sx={{
                 display: "flex",
@@ -473,7 +511,7 @@ const Homepage = () => {
             >
               <Typography
                 sx={{
-                  fontWeight:'bold',
+                  fontWeight: "bold",
                   color: "#f0f0f0",
                   textAlign: "center",
                   width: "100%",
@@ -485,13 +523,15 @@ const Homepage = () => {
               <Box
                 sx={{
                   display: "grid",
-                  gridTemplateColumns: "repeat(3,1fr)",
-                  gap: isMobile ? "5px" : "5px",
+                  gridTemplateColumns: "repeat(4,1fr)",
+
+                  gap: isMobile ? "8px" : "5px",
                 }}
               >
-                {outils.map((outil) => {
+                {outils.map((outil, index) => {
                   return (
                     <Box
+                      key={index}
                       sx={{
                         display: "flex",
                         flexDirection: "column",
@@ -508,7 +548,10 @@ const Homepage = () => {
                           height: isMobile ? "40px" : "50px",
                         }}
                       />
-                      <Typography sx={{ fontStyle:'italic',color: "#f0f0f0" }} variant="body2">
+                      <Typography
+                        sx={{ fontStyle: "italic", color: "#f0f0f0" }}
+                        variant="body2"
+                      >
                         {outil.title}
                       </Typography>
                     </Box>
@@ -516,8 +559,8 @@ const Homepage = () => {
                 })}
               </Box>
             </Box>
-          </Box>
-        </Animation>
+          </Animation>
+        </Box>
       </Box>
       <Box
         id="experiences"
@@ -526,10 +569,12 @@ const Homepage = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          mt: "100px",
+          mt: isMobile? '100px' : '0px',
           pt: "60px",
+          position: "relative",
         }}
       >
+        <ShapeAnimation size="large" bottom="300px" right="20vw" />
         <Animation
           animationIn="fadeIn"
           animationOut="fadeOut"
@@ -537,33 +582,43 @@ const Homepage = () => {
           initiallyVisible={false}
         >
           <Typography
-            sx={{ fontWeight:'bold',color: "#ff932b" }}
+            sx={{ fontWeight: "bold", color: "#ff932b" }}
             variant={isMobile ? "h4" : "h3"}
           >
             Expériences
           </Typography>
-          <Box
-            sx={{
-              display: "grid",
-              gridTemplateColumns: isMobile ? "100%" : "repeat(3,1fr)",
-              width: "90%",
-              maxWidth: "1100px",
-              mt: "60px",
-              gap: isMobile ? "70px" : "20px",
-            }}
-          >
-            {experiences.map((experience) => {
-              return (
-                <ExperienceCard
-                  title={experience.title}
-                  date={experience.date}
-                  description={experience.description}
-                  place={experience.place}
-                />
-              );
-            })}
-          </Box>
         </Animation>
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: isMobile ? "100%" : "repeat(3,1fr)",
+            width: "90%",
+            maxWidth: "1100px",
+            mt: isMobile? '30px' : "70px",
+            gap: isMobile ? "70px" : "20px",
+          }}
+        >
+          {experiences.map((experience, index) => {
+            return (
+              <Animation
+                animationIn="fadeIn"
+                animationOut="fadeOut"
+                duration={4}
+                initiallyVisible={false}
+              >
+                <Box sx={{ placeSelf: "center" }} key={index}>
+                  <ExperienceCard
+                    title={experience.title}
+                    date={experience.date}
+                    description={experience.description}
+                    place={experience.place}
+                    isMobile={isMobile}
+                  />
+                </Box>
+              </Animation>
+            );
+          })}
+        </Box>
       </Box>
       <Box
         id="contact"
@@ -574,8 +629,10 @@ const Homepage = () => {
           alignItems: "center",
           mt: "100px",
           p: "60px 40px",
+          position: "relative",
         }}
       >
+        <ShapeAnimation size="small" bottom="500px" right="60vw" />
         <Animation
           animationIn="fadeIn"
           animationOut="fadeOut"
@@ -583,7 +640,7 @@ const Homepage = () => {
           initiallyVisible={false}
         >
           <Typography
-            sx={{ fontWeight:'bold',color: "#ff932b" }}
+            sx={{ fontWeight: "bold", color: "#ff932b" }}
             variant={isMobile ? "h4" : "h3"}
           >
             Contact
@@ -615,7 +672,7 @@ const Homepage = () => {
               variant="body2"
               color="#F0F0F0"
               sx={{
-                fontStyle:'italic',
+                fontStyle: "italic",
                 width: "80%",
                 textAlign: "center",
                 m: "10px 0px 50px 0px",
@@ -688,7 +745,7 @@ const Homepage = () => {
           </Box>
         </Animation>
       </Box>
-      <Footer />
+      <Footer isMobile={isMobile} />
       <CustomModal
         open={openModal}
         setOpen={setOpenModal}

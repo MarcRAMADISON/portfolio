@@ -1,12 +1,11 @@
 import React from "react";
 import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 
-const ServiceCard = ({ service, setClickedService, setOpen, key = 0 }) => {
+const ServiceCard = ({ service, setClickedService, setOpen, }) => {
   const isMobile = useMediaQuery("(max-width:920px)");
 
   return (
     <Box
-      key={key}
       sx={{
         position: "relative",
         display: "flex",
@@ -16,7 +15,7 @@ const ServiceCard = ({ service, setClickedService, setOpen, key = 0 }) => {
         backgroundColor: "#222",
         padding: "10px",
         maxWidth: "320px",
-        height: isMobile ? "370px" : "350px",
+        height: isMobile?"320px" : "350px",
         placeSelf: "center",
         ":hover .overlay": {
           height: "100%",
@@ -36,7 +35,7 @@ const ServiceCard = ({ service, setClickedService, setOpen, key = 0 }) => {
         {service.name}
       </Typography>
       <img
-        style={{ maxWidth: "300px", maxHeight: "300px", placeSelf: "center" }}
+        style={{ maxWidth: isMobile? "250px" : "300px", maxHeight: isMobile? "250px" : "300px", placeSelf: "center" }}
         src={service.icon}
         alt="icon service"
       />
@@ -70,9 +69,9 @@ const ServiceCard = ({ service, setClickedService, setOpen, key = 0 }) => {
               width: "100%",
             }}
           >
-            {(service.description || []).map((d) => {
+            {(service.description || []).map((d,index) => {
               return (
-                <Box sx={{ display: "flex" }}>
+                <Box key={index} sx={{ display: "flex" }}>
                   <Box
                     sx={{
                       backgroundColor: "#ff932b",
