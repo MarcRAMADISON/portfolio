@@ -133,22 +133,7 @@ const Homepage = () => {
     }));
   };
 
-  return loading ? (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        mt: "25vh",
-      }}
-    >
-      <Lottie
-        style={{ width: isMobile ? "55vh" : "50vh" }}
-        animationData={techAnimation}
-      />
-    </Box>
-  ) : (
-    <Box
+  return (<Box
       style={{
         backgroundColor: "#0f0f0f",
         dispalay: "flex",
@@ -763,8 +748,8 @@ const Homepage = () => {
         title={clickedService?.name}
         description={clickedService?.description}
       />
-    </Box>
-  );
+    </Box>)
+
 };
 
 export default Homepage;
