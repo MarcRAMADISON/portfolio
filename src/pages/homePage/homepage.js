@@ -17,19 +17,17 @@ import { experiences, outils, services } from "../../utilities/data";
 import ServiceCard from "../../components/ServiceCard";
 import Lottie from "lottie-react";
 import animation from "./welcomeAnimation.json";
-import techAnimation from "./techAnimation.json";
 import emailjs from "@emailjs/browser";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import CustomModal from "../../components/CustomModal";
 import ExperienceCard from "../../components/ExperienceCard";
 import Footer from "../../components/footer/footer";
-import { Download, Send } from "@mui/icons-material";
+import { Send } from "@mui/icons-material";
 import { Chart } from "chart.js/auto";
-import my_cv from "./new-cv.pdf";
 import ShapeAnimation from "../../components/shapeAnimation";
 import ScrollView from "../../components/scrollView";
-import animation1 from "../homePage/Animation1.json";
+import Welcome from "../../components/welcome/welcome";
 
 const Homepage = () => {
   const isMobile = useMediaQuery("(max-width:920px)");
@@ -133,82 +131,21 @@ const Homepage = () => {
     }));
   };
 
-  return (<Box
+  return (
+    <Box
       style={{
         backgroundColor: "#0f0f0f",
         dispalay: "flex",
         flexDirection: "column",
         alignItems: "center",
+        overflowX:'hidden'
       }}
     >
+      
       <ScrollView />
       <MenuBar />
       <SpeedMail />
-      <Box
-        id="home"
-        className="block"
-        sx={{
-          width: "100vw",
-          maxWidth:"1680px",
-          height: "90vh",
-          minHeight: isMobile? "100vh": "900px",
-          margin:"auto",
-          placeSelf:"center",
-          display:"flex",
-          flexDirection: isMobile? 'column' : 'row'
-        }}
-      >
-        
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            marginTop:isMobile ? '17vh' : '40vh',
-            width: isMobile ? "100%" : "60%",
-            textAlign:"center",
-            marginLeft:isMobile ? '0px' : '2rem'
-          }}
-        >
-          <Typography
-            sx={{ fontWeight: "bold", color: "#ff932b" }}
-            variant={isMobile ? "h4" : "h3"}
-          >
-            Marc RAMADISON
-          </Typography>
-
-          <Typography
-            sx={{ fontStyle: "italic", color: "#f0f0f0", mt: "10px" }}
-            variant={isMobile ? "body1" : "h6"}
-          >
-            Développeur web fullstack
-          </Typography>
-
-          <a
-            href={my_cv}
-            download="Marc_Ramadison's_CV"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Button
-              startIcon={<Download />}
-              size={isMobile ? "medium" : "large"}
-              variant="contained"
-              sx={{ mt: isMobile ? "30px" : "40px" }}
-            >
-              Télécharger mon CV
-            </Button>
-          </a>
-        </Box>
-        <Lottie
-            style={{
-              maxWidth: "920px",
-            }}
-            width="90%"
-            animationData={animation1}
-          />
-        
-      </Box>
+      <Welcome isMobile={isMobile}/>
       <Box
         id="about"
         className="block"
@@ -748,7 +685,8 @@ const Homepage = () => {
         title={clickedService?.name}
         description={clickedService?.description}
       />
-    </Box>)
+    </Box>
+ )
 
 };
 

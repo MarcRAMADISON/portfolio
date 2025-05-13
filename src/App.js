@@ -10,7 +10,6 @@ function App() {
             <Route path="/" Component={Homepage} />
           </Routes>
         </Router>   
-
   );
 }
 

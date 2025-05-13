@@ -206,7 +206,7 @@ const MenuBar = () => {
       ) : (
         <Box className="container">
           <img
-            style={{ height: "60px", marginLeft: "50px" }}
+            style={{ height: "100px", marginLeft: "120px" }}
             src="/icones/my-logo.png"
             alt="Marc logo"
           />
