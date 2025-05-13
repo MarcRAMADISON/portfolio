@@ -134,7 +134,7 @@ const Homepage = () => {
   return (
     <Box
       style={{
-        backgroundColor: "#0f0f0f",
+        backgroundColor: "#000",
         dispalay: "flex",
         flexDirection: "column",
         alignItems: "center",
