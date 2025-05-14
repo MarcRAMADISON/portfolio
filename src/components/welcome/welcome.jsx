@@ -15,13 +15,15 @@ function Welcome({isMobile}) {
         className="block"
         sx={{
           width: "100vw",
-          maxWidth:"1680px",
+          maxWidth:"1920px",
+          maxHeight:"1080px",
           height: "90vh",
           minHeight: isMobile? "100vh": "900px",
           placeSelf:"center",
           display:"flex",
           flexDirection: isMobile? 'column' : 'row',
           position:'relative',
+          margin:"auto",
         }}
       >
         <ParticlesBackground/>
@@ -30,7 +32,8 @@ function Welcome({isMobile}) {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            marginTop:isMobile ? '17vh' : '40vh',
+            margin:isMobile? "17vh auto auto auto" : "auto",
+            placeSelf:"center",
             width: isMobile ? "100%" : "60%",
             textAlign:"center",
             marginLeft:isMobile ? '0px' : '2rem',
@@ -70,6 +73,8 @@ function Welcome({isMobile}) {
         <Lottie
             style={{
               maxWidth: "920px",
+              margin:"auto",
+              placeSelf:"end"
             }}
             width="90%"
             animationData={animation1}

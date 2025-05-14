@@ -5,6 +5,7 @@
     left:'0';
     z-index: 10;
     width: 100%;
+    max-width: 1920px;
     height: 100px;
     background-color:#0F0F0F;
     box-shadow: 1px 1px 1px #f0f0f0;
